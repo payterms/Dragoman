@@ -1,4 +1,4 @@
-package ru.payts.dragoman.model.datasource
+package ru.payts.dragoman.model.data.api
 
 import ru.payts.dragoman.model.data.DataModel
 import io.reactivex.Observable

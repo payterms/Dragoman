@@ -1,4 +1,4 @@
-package com.anikin.aleksandr.simplevocabulary.viewmodel
+package ru.payts.dragoman.viewmodel
 
 import io.reactivex.Observable
 
