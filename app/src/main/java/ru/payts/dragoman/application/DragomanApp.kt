@@ -1,26 +1,17 @@
 package ru.payts.dragoman.application
 
-import android.app.Activity
 import android.app.Application
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import ru.payts.dragoman.di.DaggerAppComponent
-import javax.inject.Inject
+import ru.payts.dragoman.di.application
+import ru.payts.dragoman.di.mainScreen
+import org.koin.core.context.startKoin
 
-class DragomanApp : Application(), HasActivityInjector {
-
-    @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
-
-    override fun activityInjector(): DispatchingAndroidInjector<Activity>? {
-        return dispatchingAndroidInjector
-    }
+class DragomanApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        DaggerAppComponent.builder()
-            .application(this)
-            .build()
-            .inject(this)
+        startKoin {
+            modules(listOf(application, mainScreen))
+        }
     }
 }
+
