@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
@@ -12,8 +11,10 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import ru.payts.dragoman.R
 import ru.payts.dragoman.model.data.AppState
 import ru.payts.dragoman.model.data.DataModel
+import ru.payts.dragoman.utils.convertMeaningsToString
 import ru.payts.dragoman.utils.network.isOnline
 import ru.payts.dragoman.view.base.BaseActivity
+import ru.payts.dragoman.view.descriptionscreen.DescriptionActivity
 import ru.payts.dragoman.view.main.adapter.MainAdapter
 
 class MainActivity : BaseActivity<AppState, MainInteractor>() {
@@ -29,7 +30,14 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
         object : MainAdapter.OnListItemClickListener {
             override fun onItemClick(data: DataModel) {
-                Toast.makeText(this@MainActivity, data.text, Toast.LENGTH_SHORT).show()
+                startActivity(
+                    DescriptionActivity.getIntent(
+                        this@MainActivity,
+                        data.text!!,
+                        convertMeaningsToString(data.meanings!!),
+                        data.meanings[0].imageUrl
+                    )
+                )
             }
         }
     private val onSearchClickListener: SearchDialogFragment.OnSearchClickListener =
@@ -111,3 +119,4 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
             "74a54328-5d62-46bf-ab6b-cbf5fgt0-092395"
     }
 }
+
