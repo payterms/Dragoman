@@ -20,19 +20,17 @@ android/gen/
 *.ipr
 *.iws
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+com_crashlytics_export_strings.xml
+
+## Gradle
+.gradle/
+
+## OS Specific
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+
+# built application files
+*.apk
+*.ap_
 
 # files for the dex VM
 *.dex
