@@ -1,4 +1,4 @@
-package payts.ru.dragoman.view.descriptionscreen
+package payts.ru.Dragoman.view.descriptionscreen
 
 import android.content.Context
 import android.content.Intent
@@ -15,7 +15,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import payts.ru.dragoman.R
+import payts.ru.Dragoman.R
 import payts.ru.utils.network.isOnline
 import payts.ru.utils.ui.AlertDialogFragment
 import kotlinx.android.synthetic.main.activity_description.*

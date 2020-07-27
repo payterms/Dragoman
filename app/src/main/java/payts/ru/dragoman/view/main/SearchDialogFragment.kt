@@ -1,4 +1,4 @@
-package payts.ru.dragoman.view.main
+package payts.ru.Dragoman.view.main
 
 import android.os.Bundle
 import android.text.Editable
@@ -10,7 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
-import payts.ru.dragoman.R
+import payts.ru.Dragoman.R
 import payts.ru.utils.getEmptyString
 import kotlinx.android.synthetic.main.search_dialog_fragment.*
 

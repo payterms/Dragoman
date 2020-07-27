@@ -3,20 +3,20 @@ package payts.ru.history.view.history
 import androidx.lifecycle.LiveData
 import payts.ru.core.viewmodel.BaseViewModel
 import payts.ru.history.parseLocalSearchResults
-import payts.ru.model.data.DataModel
+import payts.ru.model.data.AppState
 import kotlinx.coroutines.launch
 
 class HistoryViewModel(private val interactor: HistoryInteractor) :
-    BaseViewModel<DataModel>() {
+    BaseViewModel<AppState>() {
 
-    private val liveDataForViewToObserve: LiveData<DataModel> = _mutableLiveData
+    private val liveDataForViewToObserve: LiveData<AppState> = _mutableLiveData
 
-    fun subscribe(): LiveData<DataModel> {
+    fun subscribe(): LiveData<AppState> {
         return liveDataForViewToObserve
     }
 
     override fun getData(word: String, isOnline: Boolean) {
-        _mutableLiveData.value = DataModel.Loading(null)
+        _mutableLiveData.value = AppState.Loading(null)
         cancelJob()
         viewModelCoroutineScope.launch { startInteractor(word, isOnline) }
     }
@@ -26,11 +26,11 @@ class HistoryViewModel(private val interactor: HistoryInteractor) :
     }
 
     override fun handleError(error: Throwable) {
-        _mutableLiveData.postValue(DataModel.Error(error))
+        _mutableLiveData.postValue(AppState.Error(error))
     }
 
     override fun onCleared() {
-        _mutableLiveData.value = DataModel.Success(null)//TODO Workaround. Set View to original state
+        _mutableLiveData.value = AppState.Success(null)//TODO Workaround. Set View to original state
         super.onCleared()
     }
 }

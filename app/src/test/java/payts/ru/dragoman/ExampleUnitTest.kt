@@ -1,4 +1,4 @@
-package payts.ru.dragoman
+package payts.ru.Dragoman
 
 import org.junit.Test
 

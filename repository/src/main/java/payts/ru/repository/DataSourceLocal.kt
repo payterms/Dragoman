@@ -1,8 +1,8 @@
 package payts.ru.repository
 
-import payts.ru.model.data.DataModel
+import payts.ru.model.data.AppState
 
 interface DataSourceLocal<T> : DataSource<T> {
 
-    suspend fun saveToDB(dataModel: DataModel)
+    suspend fun saveToDB(appState: AppState)
 }

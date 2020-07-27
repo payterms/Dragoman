@@ -2,10 +2,10 @@ package payts.ru.core.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import payts.ru.model.data.DataModel
+import payts.ru.model.data.AppState
 import kotlinx.coroutines.*
 
-abstract class BaseViewModel<T : DataModel>(
+abstract class BaseViewModel<T : AppState>(
     protected open val _mutableLiveData: MutableLiveData<T> = MutableLiveData()
 ) : ViewModel() {
 

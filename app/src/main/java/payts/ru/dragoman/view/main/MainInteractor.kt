@@ -1,24 +1,24 @@
-package payts.ru.dragoman.view.main
+package payts.ru.Dragoman.view.main
 
 import payts.ru.core.viewmodel.Interactor
+import payts.ru.model.data.AppState
 import payts.ru.model.data.DataModel
-import payts.ru.model.data.SearchResult
 import payts.ru.repository.Repository
 import payts.ru.repository.RepositoryLocal
 
 class MainInteractor(
-    private val repositoryRemote: Repository<List<SearchResult>>,
-    private val repositoryLocal: RepositoryLocal<List<SearchResult>>
-) : Interactor<DataModel> {
+    private val repositoryRemote: Repository<List<DataModel>>,
+    private val repositoryLocal: RepositoryLocal<List<DataModel>>
+) : Interactor<AppState> {
 
-    override suspend fun getData(word: String, fromRemoteSource: Boolean): DataModel {
-        val dataModel: DataModel
+    override suspend fun getData(word: String, fromRemoteSource: Boolean): AppState {
+        val appState: AppState
         if (fromRemoteSource) {
-            dataModel = DataModel.Success(repositoryRemote.getData(word))
-            repositoryLocal.saveToDB(dataModel)
+            appState = AppState.Success(repositoryRemote.getData(word))
+            repositoryLocal.saveToDB(appState)
         } else {
-            dataModel = DataModel.Success(repositoryLocal.getData(word))
+            appState = AppState.Success(repositoryLocal.getData(word))
         }
-        return dataModel
+        return appState
     }
 }

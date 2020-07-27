@@ -1,7 +1,7 @@
 package payts.ru.repository
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import payts.ru.model.data.SearchResult
+import payts.ru.model.data.DataModel
 import payts.ru.repository.api.ApiService
 import payts.ru.repository.api.BaseInterceptor
 import okhttp3.Interceptor
@@ -10,9 +10,9 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RetrofitImplementation : DataSource<List<SearchResult>> {
+class RetrofitImplementation : DataSource<List<DataModel>> {
 
-    override suspend fun getData(word: String): List<SearchResult> {
+    override suspend fun getData(word: String): List<DataModel> {
         return getService(BaseInterceptor.interceptor).searchAsync(word).await()
     }
 
