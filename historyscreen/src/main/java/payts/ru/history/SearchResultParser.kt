@@ -1,8 +1,8 @@
 package payts.ru.history
 
 import payts.ru.model.data.AppState
-import payts.ru.model.data.DataModel
-import payts.ru.model.data.Meanings
+import payts.ru.model.data.userdata.DataModel
+import payts.ru.model.data.userdata.Meaning
 
 fun parseLocalSearchResults(data: AppState): AppState {
     return AppState.Success(mapResult(data, false))
@@ -24,32 +24,47 @@ private fun mapResult(
 private fun getSuccessResultData(
     data: AppState.Success,
     isOnline: Boolean,
-    newDataModels: ArrayList<DataModel>
+    newSearchDataModels: ArrayList<DataModel>
 ) {
-    val dataModels: List<DataModel> = data.data as List<DataModel>
-    if (dataModels.isNotEmpty()) {
+    val searchDataModels: List<DataModel> = data.data as List<DataModel>
+    if (searchDataModels.isNotEmpty()) {
         if (isOnline) {
-            for (searchResult in dataModels) {
-                parseOnlineResult(searchResult, newDataModels)
+            for (searchResult in searchDataModels) {
+                parseOnlineResult(searchResult, newSearchDataModels)
             }
         } else {
-            for (searchResult in dataModels) {
-                newDataModels.add(DataModel(searchResult.text, arrayListOf()))
+            for (searchResult in searchDataModels) {
+                newSearchDataModels.add(
+                    DataModel(
+                        searchResult.text,
+                        arrayListOf()
+                    )
+                )
             }
         }
     }
 }
 
-private fun parseOnlineResult(dataModel: DataModel, newDataModels: ArrayList<DataModel>) {
-    if (!dataModel.text.isNullOrBlank() && !dataModel.meanings.isNullOrEmpty()) {
-        val newMeanings = arrayListOf<Meanings>()
-        for (meaning in dataModel.meanings!!) {
-            if (meaning.translation != null && !meaning.translation!!.translation.isNullOrBlank()) {
-                newMeanings.add(Meanings(meaning.translation, meaning.imageUrl))
+private fun parseOnlineResult(searchDataModel: DataModel, newSearchDataModels: ArrayList<DataModel>) {
+    if (searchDataModel.text.isNotBlank() && searchDataModel.meanings.isNotEmpty()) {
+        val newMeanings = arrayListOf<Meaning>()
+        for (meaning in searchDataModel.meanings) {
+            if (meaning.translatedMeaning.translatedMeaning.isBlank()) {
+                newMeanings.add(
+                    Meaning(
+                        meaning.translatedMeaning,
+                        meaning.imageUrl
+                    )
+                )
             }
         }
         if (newMeanings.isNotEmpty()) {
-            newDataModels.add(DataModel(dataModel.text, newMeanings))
+            newSearchDataModels.add(
+                DataModel(
+                    searchDataModel.text,
+                    newMeanings
+                )
+            )
         }
     }
 }
